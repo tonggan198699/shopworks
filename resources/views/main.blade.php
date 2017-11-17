@@ -2,38 +2,50 @@
 
 @section('content')
 
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Number of Days</th>
-      </tr>
+<section class="hero is-info">
 
-              @foreach($staffs as $staff)
-    <tbody>
+  <div class="container">
+    <h1 class="title">
+        Staff Rota Table
+      </h1>
+    <table class="table is-narrow">
+
+      <thead>
         <tr>
-          <th>{{ $staff->id }}</th>
-          @if ($staff->starttime)
-            <th>{{ $staff->starttime }}</th>
-          @else
-            <th> N.A </th>
-          @endif
-          @if ($staff->starttime)
-            <th>{{ $staff->endtime }}</td>
-          @else
-            <th> N.A </th>
-          @endif
-          <th>{{ $staff->daynumber }}</td>
+          <th></th>
+          <th>Start Time (Day 1 to 6)</th>
+          <th>End Time (Day 1 to 6)</th>
         </tr>
-    </tbody>
-                  @endforeach
-    </thead>
-  </table>
+        <tr>
+          <th>ID</th>
+        </tr>
 
-</div>
+    @foreach($staffs as $staff)
+      <tbody>
+          <tr>
+            <th>
+              {{ $staff->id }}
+            </th>
+            <th>
+              @for ($i = 0; $i < ($staff->daynumber); $i++)
+                @if ($staff->starttime)
+                  {{ $staff->starttime }}
+                @endif
+              @endfor
+            </th>
+            <th>
+              @for ($i = 0; $i < ($staff->daynumber); $i++)
+                @if ($staff->endtime)
+                  {{ $staff->endtime }}
+                @endif
+              @endfor
+            </th>
+          </tr>
+      </tbody>
+    @endforeach
+      </thead>
+    </table>
 
-
+  </div>
+</section>
 @endsection
